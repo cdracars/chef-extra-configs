@@ -2,10 +2,11 @@
 # Cookbook Name:: Drupal Extras
 # Recipe:: default
 #
-# Copyright 2012, YOUR_COMPANY_NAME
+# Copyright 2012, Dracars Designs
 #
 # All rights reserved - Do Not Redistribute
 #
+# To-Do add attributes to abstract values
 
 
   package "libpcre3-dev" do
@@ -29,4 +30,12 @@
 
     ignore_failure true
 
+  end
+  
+  execute "git-config-user" do
+    command 'git config --global user.name "Cody Dracars"'
+  end
+  
+  execute "git-config-user-email" do
+    command 'git config --global user.email cdracars@gmail.com'
   end
