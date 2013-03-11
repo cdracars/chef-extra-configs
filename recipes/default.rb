@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: Drupal Extras
+# Cookbook Name:: Extra Configs
 # Recipe:: default
 #
 # Copyright 2012, Dracars Designs
@@ -7,10 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 # To-Do add attributes to abstract values
-
-  php_pear "pdo" do
-    action :install
-  end
 
   # Requried to install APC.
   package "libpcre3-dev"
@@ -22,10 +18,6 @@
     action :install
   end
 
-  php_pear "memcache" do
-    action :install
-  end
-
   template "/etc/php5/apache2/php.ini" do
     source "php.ini.erb"
     owner "root"
@@ -34,12 +26,10 @@
     notifies :restart, resources("service[apache2]"), :delayed
   end
 
-  bash "vimrc-install" do
-    code <<-EOH
-      cd /home/vagrant
-      git clone https://github.com/cdracars/Drupal-Git-Vim.git /home/vagrant/.vim
-      ln -s /home/vagrant/.vim/.vimrc /home/vagrant/.vimrc
-    EOH
+  execute "vimrc-install" do
+    cwd "/home/vagrant"
+    git clone https://github.com/cdracars/Drupal-Git-Vim.git /home/vagrant/.vim; \
+    ln -s /home/vagrant/.vim/.vimrc /home/vagrant/.vimrc;
     not_if do
       File.exists?("/home/vagrant/.vimrc")
     end
