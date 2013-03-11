@@ -1,3 +1,4 @@
+name             "drupal-extras"f
 maintainer       "Dracars Designs"
 maintainer_email "cdracars@gmail.com"
 license          "All rights reserved"
