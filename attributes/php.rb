@@ -1,5 +1,5 @@
 #; Enable the PHP scripting language engine under Apache.
-default[:php5][:engine]                                     = "On"
+default['php5']['engine']                                     = "On"
 
 =begin
 ; Allow the <? tag.  Otherwise, only <?php and <script> tags are recognized.
@@ -9,13 +9,13 @@ default[:php5][:engine]                                     = "On"
 ; be supported on the target server. For portable, redistributable code,
 ; be sure not to use short tags.
 =end
-default[:php5][:short_open_tag]                            = "On"
+default['php5']['short_open_tag']                            = "On"
 
 #; Allow ASP-style <% %> tags.
-default[:php5][:asp_tags]                                   = "Off"
+default['php5']['asp_tags']                                   = "Off"
 
 #*; The number of significant digits displayed in floating point numbers.
-default[:php5][:precision]                                  = "12"
+default['php5']['precision']                                  = "12"
 
 =begin
 ; Output buffering allows you to send header lines (including cookies) even
@@ -27,21 +27,21 @@ default[:php5][:precision]                                  = "12"
 ; a value for this directive (e.g., output_buffering=4096).
 =end
 
-default[:php5][:output_buffering]                           = "Off"
+default['php5']['output_buffering']                           = "Off"
 
 =begin
 ; When floats & doubles are serialized store serialize_precision significant
 ; digits after the floating point. The default value ensures that when floats
 ; are decoded with unserialize, the data will remain the same.
 =end
-default[:php5][:serialize_precision]                        = "100"
+default['php5']['serialize_precision']                        = "100"
 
 #; Maximum amount of memory a script may consume (16MB)
-default[:php5][:resource_limits][:memory_limit]             = "196M"
+default['php5']['resource_limits']['memory_limit']             = "196M"
 
 #; Maximum execution time of each script, in seconds
-default[:php5][:resource_limits][:max_execution_time]       = "30"
-default[:php5][:error_handling][:error_reporting]           = "ALL"
+default['php5']['resource_limits']['max_execution_time']       = "30"
+default['php5']['error_handling']['error_reporting']           = "ALL"
 
 =begin
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -89,7 +89,7 @@ default[:php5][:error_handling][:error_reporting]           = "ALL"
 ;   - Show all errors except for notices and coding standards warnings
 ;
 =end
-default[:php5][:error_handling][:display_errors]            = "On"
+default['php5']['error_handling']['display_errors']            = "On"
 
 =begin
 ; Log errors into a log file (server-specific log, stderr, or error_log (below))
@@ -97,13 +97,13 @@ default[:php5][:error_handling][:display_errors]            = "On"
 ; error displaying on production web sites.
 =end
 
-default[:php5][:error_handling][:log_errors]                = "On"
+default['php5']['error_handling']['log_errors']                = "On"
 
 #; Maximum size of POST data that PHP will accept.
-default[:php5][:data_handling][:post_max_size] = "1024M"
+default['php5']['data_handling']['post_max_size'] = "1024M"
 
 #; Whether to allow HTTP file uploads.
-default[:php5][:file_uploads][:file_uploads] = "On"
+default['php5']['file_uploads']['file_uploads'] = "On"
 
 #; Maximum allowed size for uploaded files.
-default[:php5][:file_uploads][:upload_max_filesize]  = "1024M"
+default['php5']['file_uploads']['upload_max_filesize']  = "1024M"
