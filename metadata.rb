@@ -1,5 +1,5 @@
-name             "drupal-extras"f
-maintainer       "Dracars Designs"
+name             "extra-configs"
+maintainer       "Cody Dracars"
 maintainer_email "cdracars@gmail.com"
 license          "All rights reserved"
 description      "Installs/Configures drupal-extras"
