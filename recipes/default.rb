@@ -25,17 +25,20 @@
     mode 0644
     notifies :restart, resources("service[apache2]"), :delayed
   end
-
-  execute "vimrc-install" do
-    cwd "/home/vagrant"
-    git clone https://github.com/cdracars/Drupal-Git-Vim.git /home/vagrant/.vim; \
-    ln -s /home/vagrant/.vim/.vimrc /home/vagrant/.vimrc;
+  
+  git "/home/vagrant/.vim" do
+    repository "git://github.com/VeggieMeat/Drupal-Git-Vim.git"
+    reference "master"
+    action :sync
     not_if do
       File.exists?("/home/vagrant/.vimrc")
     end
-    ignore_failure true
   end
-
+  
+  link "/home/vagrant/.vim/.vimrc" do
+    to "/home/vagrant/.vimrc"
+  end
+  
   execute "git-config-user" do
     command 'git config --global user.name "Cody Dracars"'
   end
