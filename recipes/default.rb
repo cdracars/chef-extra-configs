@@ -48,6 +48,8 @@
   end
 
   # Varnish
+  node.default['varnish']['instance'] = node['hostname']
+
   template "/etc/varnish/default.vcl" do
     source "default.vcl.erb"
     mode "0644"
