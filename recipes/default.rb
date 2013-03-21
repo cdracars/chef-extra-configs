@@ -42,8 +42,8 @@
 
   template "/home/#{ node['extra-configs']['user'] }/.gitconfig" do
     source "gitconfig.erb"
-    owner "#{ node['extra-configs']['user'] }"
-    group "#{ node['extra-configs']['group'] }"
+    owner #{ node['extra-configs']['user'] }
+    group #{ node['extra-configs']['group'] }
     mode 0644
   end
 
