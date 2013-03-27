@@ -26,7 +26,7 @@
     owner "root"
     group "root"
     mode 0644
-    notifies :restart, resources("service[apache2]"), :delayed
+    notifies(:restart, "service[apache2]"), :delayed
   end
 
   # Vimrc
