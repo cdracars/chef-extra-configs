@@ -26,7 +26,7 @@
     owner "root"
     group "root"
     mode 0644
-    notifies(:restart, "service[apache2]"), :delayed
+    notifies(:restart, "service[apache2]", :delayed)
   end
 
   # Vimrc
@@ -56,7 +56,7 @@
   template "/etc/varnish/default.vcl" do
     source "default.vcl.erb"
     mode "0644"
-    notifies :restart, resources("service[varnish]"), :delayed
+    notifies(:restart, "service[varnish]", :delayed)
     only_if do
       File.exists?("/etc/varnish/")
     end
