@@ -11,22 +11,30 @@
   ssh_known_hosts_entry 'github.com'
   ssh_known_hosts_entry 'bitbucket.com'
 
-  # Requried to install APC.
-  package "libpcre3-dev"
+  if node.php.attribute?("checksum")
+    include_recipe "php"
 
-  # Install APC.
-  php_pear "apc" do
-    directives(:shm_size => "70M")
-    version "3.1.6" #ARGH!!! debuging enabled on APC builds circa 5/2011. Pin back.
-    action :install
+    # Requried to install APC.
+    package "libpcre3-dev"
+
+    # Install APC.
+    php_pear "apc" do
+      directives(:shm_size => "70M")
+      version "3.1.6" #ARGH!!! debuging enabled on APC builds circa 5/2011. Pin back.
+      action :install
+    end
   end
 
-  template "/etc/php5/apache2/php.ini" do
-    source "php.ini.erb"
-    owner "root"
-    group "root"
-    mode 0644
-    notifies(:restart, "service[apache2]", :delayed)
+  if node.apace2.attribute?("listen_ports")
+    include_recipe "apache2"
+
+    template "/etc/php5/apache2/php.ini" do
+      source "php.ini.erb"
+      owner "root"
+      group "root"
+      mode 0644
+      notifies(:restart, "service[apache2]", :delayed)
+    end
   end
 
   # Vimrc
@@ -51,9 +59,11 @@
   end
 
   # Varnish
-  node.default['varnish']['instance'] = node['hostname']
+  if node.varnish.attribute?("start")
+    include_recipe "varnish"
 
-if node.varnish.attribute?("start")
+    node.default['varnish']['instance'] = node['hostname']
+
     template "/etc/varnish/default.vcl" do
       source "default.vcl.erb"
       mode "0644"
