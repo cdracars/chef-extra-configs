@@ -54,4 +54,7 @@
     source "default.vcl.erb"
     mode "0644"
     notifies :restart, resources("service[varnish]"), :delayed
+    only_if do
+      File.exists?("/etc/varnish/")
+    end
   end
