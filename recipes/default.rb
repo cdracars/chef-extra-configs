@@ -7,6 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 # To-Do add attributes to abstract values
+  # Known Hosts
+  ssh_known_hosts_entry 'github.com'
+  ssh_known_hosts_entry 'bitbucket.com'
 
   # Requried to install APC.
   package "libpcre3-dev"
