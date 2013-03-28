@@ -11,31 +11,27 @@
   ssh_known_hosts_entry 'github.com'
   ssh_known_hosts_entry 'bitbucket.com'
 
-  if node.php.attribute?("checksum")
-    # Requried to install APC.
-    package "libpcre3-dev"
+  # Requried to install APC.
+  package "libpcre3-dev"
 
-    # Install APC.
-    php_pear "apc" do
-      directives(:shm_size => "70M")
-      version "3.1.6" #ARGH!!! debuging enabled on APC builds circa 5/2011. Pin back.
-      action :install
-    end
-    only_if  do
-      File.exists?('/etc/php5')
+  # Install APC.
+  php_pear "apc" do
+    directives(:shm_size => "70M")
+    version "3.1.6" #ARGH!!! debuging enabled on APC builds circa 5/2011. Pin back.
+    action :install
+    only_if do
+      File.exists?("/etc/php5")
     end
   end
 
-  if node.apache.attribute?("listen_ports")
-    template "/etc/php5/apache2/php.ini" do
-      source "php.ini.erb"
-      owner "root"
-      group "root"
-      mode 0644
-      notifies(:restart, "service[apache2]", :delayed)
-      only_if do
-        File.exists?('/etc/php5/apache2/')
-      end
+  template "/etc/php5/apache2/php.ini" do
+    source "php.ini.erb"
+    owner "root"
+    group "root"
+    mode 0644
+    notifies(:restart, "service[apache2]", :delayed)
+    only_if do
+      File.exists?("/etc/php5/apache2/")
     end
   end
 
