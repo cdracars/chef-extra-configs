@@ -12,8 +12,6 @@
   ssh_known_hosts_entry 'bitbucket.com'
 
   if node.php.attribute?("checksum")
-    include_recipe "php"
-
     # Requried to install APC.
     package "libpcre3-dev"
 
@@ -23,17 +21,17 @@
       version "3.1.6" #ARGH!!! debuging enabled on APC builds circa 5/2011. Pin back.
       action :install
     end
+    only_if( File.exists? '/etc/php5')
   end
 
   if node.apache.attribute?("listen_ports")
-    include_recipe "apache2"
-
     template "/etc/php5/apache2/php.ini" do
       source "php.ini.erb"
       owner "root"
       group "root"
       mode 0644
       notifies(:restart, "service[apache2]", :delayed)
+      only_if( File.exists? '/etc/php5/apache2/')
     end
   end
 
