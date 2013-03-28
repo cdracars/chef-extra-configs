@@ -21,7 +21,9 @@
       version "3.1.6" #ARGH!!! debuging enabled on APC builds circa 5/2011. Pin back.
       action :install
     end
-    only_if {File.exists?('/etc/php5')}
+    only_if  do
+      File.exists?('/etc/php5')
+    end
   end
 
   if node.apache.attribute?("listen_ports")
@@ -31,7 +33,9 @@
       group "root"
       mode 0644
       notifies(:restart, "service[apache2]", :delayed)
-      only_if { File.exists?('/etc/php5/apache2/')}
+      only_if do
+        File.exists?('/etc/php5/apache2/')
+      end
     end
   end
 
