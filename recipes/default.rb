@@ -25,7 +25,7 @@
     end
   end
 
-  if node.apache2.attribute?("listen_ports")
+  if node.apache.attribute?("listen_ports")
     include_recipe "apache2"
 
     template "/etc/php5/apache2/php.ini" do
