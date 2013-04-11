@@ -24,17 +24,6 @@
     end
   end
 
-# template "/etc/php5/apache2/php.ini" do
-#   source "php.ini.erb"
-#   owner "root"
-#   group "root"
-#   mode 0644
-#  notifies(:restart, "service[apache2]", :delayed)
-#  only_if do
-#    File.exists?("/etc/php5/apache2/")
-#  end
-#  end
-
   # Vimrc
   git "/home/#{ node['extra-configs']['user'] }/.vim" do
     repository "git://github.com/VeggieMeat/Drupal-Git-Vim.git"
