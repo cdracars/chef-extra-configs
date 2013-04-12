@@ -25,20 +25,20 @@
   end
 
   # Vimrc
-  git "/home/#{ node['extra-configs']['user'] }/.vim" do
+  git "~/.vim" do
     repository "git://github.com/VeggieMeat/Drupal-Git-Vim.git"
     reference "master"
     action :sync
     not_if do
-      File.exists?("/home/#{ node['extra-configs']['user'] }/.vimrc")
+      File.exists?("~/.vimrc")
     end
   end
 
-  link "/home/#{ node['extra-configs']['user'] }/.vim/.vimrc" do
-    to "/home/#{ node['extra-configs']['user'] }/.vimrc"
+  link "~/.vim/.vimrc" do
+    to "~/.vimrc"
   end
 
-  template "/home/#{ node['extra-configs']['user'] }/.gitconfig" do
+  template "~/.gitconfig" do
     source "gitconfig.erb"
     owner #{ node['extra-configs']['user'] }
     group #{ node['extra-configs']['group'] }
