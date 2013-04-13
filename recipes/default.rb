@@ -25,20 +25,21 @@
   end
 
   # Vimrc
-  git "~/.vim" do
+  git "git vimrc clone" do
     repository "git://github.com/VeggieMeat/Drupal-Git-Vim.git"
     reference "master"
     action :sync
+    destination "/etc/vim/.vim"
     not_if do
-      File.exists?("~/.vimrc")
+      File.exists?("/etc/vim/.vim")
     end
   end
 
-  link "~/.vim/.vimrc" do
-    to "~/.vimrc"
+  link "/etc/vim/.vim/.vimrc" do
+    to "/etc/vim/vimrc.local"
   end
 
-  template "~/.gitconfig" do
+  template File.expand_path("~/.gitconfig") do
     source "gitconfig.erb"
     owner #{ node['extra-configs']['user'] }
     group #{ node['extra-configs']['group'] }
