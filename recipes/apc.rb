@@ -6,7 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 
-include_recipe "postfix"
+include_recipe "php"
 
 package "libpcre3-dev"
 
