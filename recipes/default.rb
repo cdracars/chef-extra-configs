@@ -5,26 +5,12 @@
 # Copyright 2012, Dracars Designs
 #
 # All rights reserved - Do Not Redistribute
-#
-# To-Do add attributes to abstract values
-  # Known Hosts
+
+# Known Hosts
   ssh_known_hosts_entry 'github.com'
   ssh_known_hosts_entry 'bitbucket.org'
 
-  # Requried to install APC.
-  package "libpcre3-dev"
-
-  # Install APC.
-  php_pear "apc" do
-    directives(:shm_size => "70M")
-    version "3.1.6" #ARGH!!! debuging enabled on APC builds circa 5/2011. Pin back.
-    action :install
-    only_if do
-      File.exists?("/etc/php5")
-    end
-  end
-
-  # Vimrc
+# Vimrc
   git "git vimrc clone" do
     repository "git://github.com/VeggieMeat/Drupal-Git-Vim.git"
     reference "master"
